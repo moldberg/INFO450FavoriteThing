@@ -1,38 +1,35 @@
 #include "stdafx.h"
 #include "SetOfTeeth.h"
 #include <iostream>
-#include <fstream>
+#include <string>
 using namespace std;
 
-//Default constructor
 SetOfTeeth::SetOfTeeth()
 {
 	listSize = 0;
 }
 
-SetOfTeeth::~SetOfTeeth()
-{
-	cout << "\nDestroying your collection\n";
-}
-
-//Gets new Tooth object made, tests entry validity, and adds to collection
 int SetOfTeeth::addTooth()
 {
-	if (toothArray[listSize].pullToothInfo() == 0
-		&& isUnique(toothArray[listSize]))
+	if (toothArray[listSize].getTooth() == 0)
 	{
-		listSize++; //Includes successfully created object in collection list
-		return 0;
+		if (isUnique(toothArray[listSize]))
+		{
+			listSize++;
+			return 0;
+		}
 	}
 	else
 	{
-		cout << " Entry aborted.";
+		cout << "Tooth operation error. Try again at your own risk." << endl;
 		return -33;
 	}
 }
 
-//Compares newly created Tooth object with all objects in collection to ensure
-//  unique species/tooth-type combinations in the catalogue.
+//int SetOfTeeth::getIndex()
+//{
+//	return listSize + 1;
+//}
 bool SetOfTeeth::isUnique(Tooth chomper)
 {
 	for (int i = 0; i < listSize; i++)
@@ -50,62 +47,25 @@ bool SetOfTeeth::isUnique(Tooth chomper)
 	return true;
 }
 
-//Puts together entries and prints it all to console.
 void SetOfTeeth::displayList()
 {
-	//Alphabetical list insertion sort, by species, then tooth type
-	//Alhabetization rewards consistency in uppercase/lowercase use!
-	for (int outer = 1; outer < listSize; outer++)
-	{
-		int inner = outer;
-		while (inner > 0 &&
-			toothArray[inner].getToothID() < toothArray[inner - 1].getToothID())
-		{
-			Tooth temp = toothArray[inner];
-			toothArray[inner] = toothArray[inner - 1];
-			toothArray[inner - 1] = temp;
-			inner--;
-		}
-	}
-	cout << "Here is your collection. It has " << listSize << " teeth!\n\n";
-	for (int i = 0; i < listSize; i++)
+	int i;
+
+	//for (int outer = 1; outer < listSize + 1; outer++)
+	//{
+	//	int inner = outer;
+	//	while (inner > 0 && (toothArray[inner].getToothID < toothArray[inner - 1].getToothID))
+	//	{
+	//		Tooth temp = toothArray[inner];
+	//		toothArray[inner] = toothArray[inner - 1];
+	//		toothArray[inner - 1] = temp;
+	//		inner--; 
+	//	}
+	//}
+
+	for (i = 0; i < listSize; i++)
 	{
 		cout << toothArray[i];
 		cout << endl << endl;
 	}
-}
-
-//Saves Tooth array entry display to text file.
-	//Note: Analogous to but independent of displayList function.
-void SetOfTeeth::save()
-{
-	string fileName;
-	ofstream toothFile;
-
-	cout << "Give a name to your file, e.g. mylist: ";
-	getline(cin, fileName);
-	toothFile.open(fileName + ".txt"); 
-
-	//Redundant code mimicking displayList, could be improved...
-	for (int outer = 1; outer < listSize; outer++)
-	{
-		int inner = outer;
-		while (inner > 0 &&
-			toothArray[inner].getToothID() < toothArray[inner - 1].getToothID())
-		{
-			Tooth temp = toothArray[inner];
-			toothArray[inner] = toothArray[inner - 1];
-			toothArray[inner - 1] = temp;
-			inner--;
-		}
-	}
-	toothFile << "Here is your collection. It has " << listSize << " teeth!\n\n";
-	for (int i = 0; i < listSize; i++)
-	{
-		toothFile << toothArray[i];
-		toothFile << endl << endl;
-	}
-
-	toothFile.close();
-	cout << "Saved!\n";
 }

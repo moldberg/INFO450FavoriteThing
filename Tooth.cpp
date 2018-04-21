@@ -1,7 +1,8 @@
 #include "stdafx.h"
-#include "Tooth.h"
+#include "Tooth.h" 
+#include <string>
 
-//Default dummy constructor
+
 Tooth::Tooth()
 {
 	species = "";
@@ -23,11 +24,10 @@ Tooth::Tooth(string animal, string toothCat, double cost, double rating, string 
 
 Tooth::~Tooth()
 {
+	cout << "If you can read this, you're in start-without-debugging mode\n";
 }
 
-//Gets user to fill in field data for a new Tooth entry. Checks for errors
-//  in certain field values as the user goes.
-int Tooth::pullToothInfo()
+int Tooth::getTooth()
 {
 	cout << "\nSpecies of animal (e.g. Walrus) that this tooth comes from : ";
 	getline(cin, species);
@@ -39,7 +39,7 @@ int Tooth::pullToothInfo()
 	cin >> price;
 	if (!cin.good()) //Error check
 	{
-		cout << "\nPrice error.";
+		cout << "\nPrice error." << endl;
 		cin.clear();
 		cin.ignore(256, '\n');
 		return -11;
@@ -49,7 +49,7 @@ int Tooth::pullToothInfo()
 	cin >> quality;
 	if (!cin.good()) //Error check
 	{
-		cout << "\nQuality error.";
+		cout << "\nQuality error." << endl;
 		cin.clear();
 		cin.ignore(256, '\n');
 		return -22;
@@ -66,25 +66,73 @@ int Tooth::pullToothInfo()
 	return 0;
 }
 
+
+
+/*
+int Tooth::addTooth(int num)
+{
+	if (num < 0)
+		return -33;
+	quality += num;
+	return 0;
+}
+
+
+int Tooth::shipInventory(int num)
+{
+if (num < 0 || num > quality)
+return -11;
+
+quality -= num;
+return 0;
+}
+*/
+
 //Gets tooth's unique identifying info
 string Tooth::getToothID()
 {
+//	string concat = species + "~" + toothType;
 	return species + " " + toothType;
 }
+/*
+//Setters
+void Tooth::setSpecies(string animal)
+{
+	species = animal;
+}
+void Tooth::setToothType(string toothCat)
+{
+	toothType = toothCat;
+}
+void Tooth::setPrice(double cost)
+{
+	price = cost;
+}
+void Tooth::setQuality(double rating)
+{
+	quality = rating;
+}
 
-//Friend function overloading "<<" to display private Tooth object fields.
-//  Function sits outside of class definitions
+void Tooth::setNote(string comment)
+{
+	note = comment;
+}
+
+*/
+
+//Friend function overloading "<<" to use private Tooth object fields
+//Function sits outside of class definitions
 ostream & operator<<(ostream &os, const Tooth &item)
 {
-	os << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-	os << " ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ " << endl;
-	os << "\t\t" << item.toothType << " of a(n) " << item.species << endl;
-	os << "^       ^       ^       ^       ^       ^       ^       ^" << endl;
-	os << "\tTooth quality: " << item.quality << " /10" << endl;
-	os << "\tDollar value: $" << item.price << endl;
-	os << "\tNotes: " << item.note << endl;
-	os << " ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ " << endl;
-	os << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+	os << "*********************************************************" << endl;
+	os << " *** *** *** *** *** *** *** *** *** *** *** *** *** *** " << endl;
+	os << item.toothType << " of a(n) " << item.species << endl;
+	os << "*       *       *       *       *       *       *       *" << endl;
+	os << "Tooth quality: " << item.quality << " /10" << endl;
+	os << "Dollar value: $" << item.price << endl;
+	os << "Notes: " << item.note << endl;
+	os << " *** *** *** *** *** *** *** *** *** *** *** *** *** *** " << endl;
+	os << "*********************************************************" << endl;
 
 	return os;
 }

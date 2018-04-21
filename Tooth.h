@@ -1,9 +1,7 @@
-//Tooth class: Work with a catalogue entry for a console user's favorite tooth
-
 #pragma once
-#include "stdafx.h"
+#include "stdafx.h" 
 #include <iostream>
-#include <string>
+#include <string> //////////only include string that was already there for kelo
 using namespace std;
 
 class Tooth
@@ -18,10 +16,18 @@ public:
 	Tooth();
 	Tooth(string animal, string toothCat, double cost, double rating, string comment);
 	~Tooth();
+	int getTooth();
+//	int addTooth(int num);
+	//	int shipInventory(int num);
 
-	int pullToothInfo();
 	string getToothID();
+	//void setSpecies(string animal);
+	//void setToothType(string toothCat);
+	//void setPrice(double cost);
+	//void setQuality(double rating);
+	//void setNote(string comment);
 
 	friend ostream & operator<<(ostream &os, const Tooth &item);
 
 };
+

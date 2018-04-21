@@ -1,9 +1,8 @@
-//Set of Teeth class: Work with a collection of user-created Tooth objects
-
-#pragma once
+#pragma once 
 
 #include "stdafx.h"
 #include "Tooth.h"
+#include <string>
 
 class SetOfTeeth
 {
@@ -12,9 +11,8 @@ private:
 	int listSize;
 public:
 	SetOfTeeth();
-	~SetOfTeeth();
 	int addTooth();
 	bool isUnique(Tooth chomper);
 	void displayList();
-	void save();
+//	int getIndex();
 };
